@@ -42,9 +42,11 @@ jobs:
           export VERSION=${TARGET_PLATFORM}
           cp vulkanCapsViewer.png appdir/usr/share/icons/hicolor/256x256/apps/vulkanCapsViewer.png
           ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/* -appimage
+
       - name: Upload
-        if: github.ref == 'refs/heads/master'
-        run: curl -T Vulkan_Caps_Viewer-X11-x86_64.AppImage ftp://${{ secrets.FTP_USER_NAME }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_SERVER_NAME }}
+        uses: actions/upload-artifact@v3
+        with:
+          path: Vulkan_Caps_Viewer-X11-x86_64.AppImage
 
   build_ubuntu_wayland:
     name: Build Ubuntu Wayland
@@ -79,9 +81,11 @@ jobs:
           export VERSION=${TARGET_PLATFORM}
           cp vulkanCapsViewer.png appdir/usr/share/icons/hicolor/256x256/apps/vulkanCapsViewer.png
           ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/* -appimage
+
       - name: Upload
-        if: github.ref == 'refs/heads/master'
-        run: curl -T Vulkan_Caps_Viewer-wayland-x86_64.AppImage ftp://${{ secrets.FTP_USER_NAME }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_SERVER_NAME }}
+        uses: actions/upload-artifact@v3
+        with:
+          path: Vulkan_Caps_Viewer-wayland-x86_64.AppImage
 
   build_macosx_10:
     name: Build macOS 10
@@ -109,9 +113,11 @@ jobs:
           make -j$(nproc)
           macdeployqt vulkanCapsViewer.app -dmg
           cp vulkanCapsviewer.dmg Vulkan_Caps_Viewer-osx-x86_64.dmg
+
       - name: Upload
-        if: github.ref == 'refs/heads/master'
-        run: curl -T Vulkan_Caps_Viewer-osx-x86_64.dmg  ftp://${{ secrets.FTP_USER_NAME }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_SERVER_NAME }}          
+        uses: actions/upload-artifact@v3
+        with:
+          path: Vulkan_Caps_Viewer-osx-x86_64.dmg
 
   build_windows:
     name: Build Windows (64 bit)
@@ -136,9 +142,11 @@ jobs:
           Remove-Item release\*.obj
           Remove-Item release\*.res
           Compress-Archive -Path release\ -DestinationPath Vulkan_Caps_Viewer-windows.zip
+
       - name: Upload
-        if: github.ref == 'refs/heads/master'
-        run: curl -T Vulkan_Caps_Viewer-windows.zip  ftp://${{ secrets.FTP_USER_NAME }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_SERVER_NAME }}
+        uses: actions/upload-artifact@v3
+        with:
+          path: Vulkan_Caps_Viewer-windows.zip
 
   build_windows_x86:
     name: Build Windows (32 bit)
@@ -169,6 +177,8 @@ jobs:
           Remove-Item release\*.obj
           Remove-Item release\*.res
           Compress-Archive -Path release\ -DestinationPath Vulkan_Caps_Viewer-windows_x86.zip
+
       - name: Upload
-        if: github.ref == 'refs/heads/master'
-        run: curl -T Vulkan_Caps_Viewer-windows_x86.zip  ftp://${{ secrets.FTP_USER_NAME }}:${{ secrets.FTP_PASS }}@${{ secrets.FTP_SERVER_NAME }}
+        uses: actions/upload-artifact@v3
+        with:
+          path: Vulkan_Caps_Viewer-windows_x86.zip
