@@ -35,13 +35,13 @@ linux:!android {
         QT += waylandclient
         DEFINES += VK_USE_PLATFORM_WAYLAND_KHR
     }
-    target.path = /usr/bin
+    target.path = $(PREFIX)/bin
     INSTALLS += target
     desktop.files = vulkanCapsViewer.desktop
-    desktop.path = /usr/share/applications
+    desktop.path = $(PREFIX)/share/applications
     icon.extra = cp $$PWD/gfx/android_icon_256.png vulkanCapsViewer.png
     icon.files = vulkanCapsViewer.png
-    icon.path = /usr/share/icons/hicolor/256x256/apps/
+    icon.path = $(PREFIX)/share/icons/hicolor/256x256/apps/
     INSTALLS += desktop icon
 }
 android {
